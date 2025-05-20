@@ -56,3 +56,21 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+
+jobs:
+  build_and_deploy_job:
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_XXX }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Needed for GitHub integrations
+          action: "upload"
+          #### ESTAS TRES SON LAS IMPORTANTES ####
+          app_location: "/" # tu código está en la raíz
+          output_location: "/" # igual, no hay carpeta de build
+          skip_app_build: true
+
