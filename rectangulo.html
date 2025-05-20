@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perímetro de Rectángulo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Perímetro de un Rectángulo</h2>
+  <form id="rectanguloForm">
+    <label>Largo (cm): <input type="number" id="largo" required min="0.1" step="any" /></label>
+    <label>Ancho (cm): <input type="number" id="ancho" required min="0.1" step="any" /></label>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script type="module">
+    import { validarCamposPositivos, mostrarResultado } from './app.js';
+
+    const form = document.getElementById('rectanguloForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const largo = parseFloat(document.getElementById('largo').value);
+      const ancho = parseFloat(document.getElementById('ancho').value);
+
+      if (!validarCamposPositivos(largo, ancho)) {
+        mostrarResultado('Los valores deben ser mayores que cero.', 'red');
+        return;
+      }
+
+      const perimetro = 2 * (largo + ancho);
+      mostrarResultado(`El perímetro del rectángulo es: ${perimetro.toFixed(2)} cm`);
+    });
+  </script>
+
+   <a href="index.html" class="boton-regresar">Regresar al menú principal</a>
+
+</body>
+</html>

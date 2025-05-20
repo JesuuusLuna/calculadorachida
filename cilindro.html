@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Volumen de Cilindro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Volumen de un Cilindro</h2>
+  <form id="cilindroForm">
+    <label>Radio (cm): <input type="number" id="radio" required min="0.1" step="any" /></label>
+    <label>Altura (cm): <input type="number" id="altura" required min="0.1" step="any" /></label>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script type="module">
+    import { validarCamposPositivos, mostrarResultado } from './app.js';
+
+    const form = document.getElementById('cilindroForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const radio = parseFloat(document.getElementById('radio').value);
+      const altura = parseFloat(document.getElementById('altura').value);
+
+      if (!validarCamposPositivos(radio, altura)) {
+        mostrarResultado('Radio y altura deben ser mayores que cero.', 'red');
+        return;
+      }
+
+      const volumen = Math.PI * Math.pow(radio, 2) * altura;
+      mostrarResultado(`El volumen del cilindro es: ${volumen.toFixed(2)} cm³`);
+    });
+  </script>
+  
+  <a href="index.html" class="boton-regresar">Regresar al menú principal</a>
+
+</body>
+</html>

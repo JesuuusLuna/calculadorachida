@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perímetro de Cuadrado</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Perímetro de un Cuadrado</h2>
+  <form id="cuadradoForm">
+    <label>Lado (cm): <input type="number" id="lado" required min="0.1" step="any" /></label>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script type="module">
+    import { validarCamposPositivos, mostrarResultado } from './app.js';
+
+    const form = document.getElementById('cuadradoForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const lado = parseFloat(document.getElementById('lado').value);
+
+      if (!validarCamposPositivos(lado)) {
+        mostrarResultado('El lado debe ser mayor que cero.', 'red');
+        return;
+      }
+
+      const perimetro = 4 * lado;
+      mostrarResultado(`El perímetro del cuadrado es: ${perimetro.toFixed(2)} cm`);
+    });
+  </script>
+
+<a href="index.html" class="boton-regresar">Regresar al menú principal</a>
+
+</body>
+</html>

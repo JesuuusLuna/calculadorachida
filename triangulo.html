@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perímetro de Triángulo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>Perímetro de un Triángulo</h2>
+  <form id="trianguloForm">
+    <label>Lado A (cm): <input type="number" id="ladoA" required min="0.1" step="any" /></label>
+    <label>Lado B (cm): <input type="number" id="ladoB" required min="0.1" step="any" /></label>
+    <label>Lado C (cm): <input type="number" id="ladoC" required min="0.1" step="any" /></label>
+    <button type="submit">Calcular</button>
+  </form>
+  <p id="resultado"></p>
+
+  <script type="module">
+    import { validarCamposPositivos, mostrarResultado } from './app.js';
+
+    const form = document.getElementById('trianguloForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const a = parseFloat(document.getElementById('ladoA').value);
+      const b = parseFloat(document.getElementById('ladoB').value);
+      const c = parseFloat(document.getElementById('ladoC').value);
+
+      if (!validarCamposPositivos(a, b, c)) {
+        mostrarResultado('Todos los lados deben ser mayores que cero.', 'red');
+        return;
+      }
+
+      const perimetro = a + b + c;
+      mostrarResultado(`El perímetro del triángulo es: ${perimetro.toFixed(2)} cm`);
+    });
+  </script>
+
+   <a href="index.html" class="boton-regresar">Regresar al menú principal</a>
+
+</body>
+</html>
